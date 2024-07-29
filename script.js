@@ -12,3 +12,13 @@ function getComputerChoice() {
         case 2: return "scissors";
     }
 }
+
+function getHumanChoice() {
+    availableWeapons = ["rock", "paper", "scissors"]
+    let weapon = undefined;
+    while (!availableWeapons.includes(weapon)) { 
+        weapon = prompt("Choose your weapon!");
+        weapon = weapon.toLowerCase().trim();
+    }
+    return weapon;
+}
