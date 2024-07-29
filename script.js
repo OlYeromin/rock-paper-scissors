@@ -33,3 +33,27 @@ function playRound(humanChoice, computerChoice) {
         case "scissors": if (computerChoice === "paper") {return 1} else {return -1};
     }
 }
+
+function playGame() {
+    let outcome;
+    let humanScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        const computerSelection = getComputerChoice();
+        const humanSelection = getComputerChoice();
+        outcome = playRound(humanSelection, computerSelection);
+        if (outcome == 1) {
+            console.log(`You win! ${humanSelection} beats ${computerSelection}.`)
+            humanScore++;
+        }
+        else if (outcome == -1) {
+            console.log(`You lose! ${computerSelection} beats ${humanSelection}.`)
+            computerScore++;
+        }
+        else console.log(`It's a tie!`);
+        console.log(`Your score: ${humanScore}. Computer's score: ${computerScore}.`)
+    }
+    if (computerScore > humanScore) console.log("You lost!")
+    else if (computerScore < humanScore) console.log("You won!")
+    else ("It's a tie!");
+}
