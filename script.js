@@ -22,3 +22,14 @@ function getHumanChoice() {
     }
     return weapon;
 }
+
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        return 0;
+    }
+    switch (humanChoice) {
+        case "rock": if (computerChoice === "scissors") {return 1} else {return -1};
+        case "paper": if (computerChoice === "rock") {return 1} else {return -1};
+        case "scissors": if (computerChoice === "paper") {return 1} else {return -1};
+    }
+}
