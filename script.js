@@ -5,7 +5,7 @@ function getRandomInt(max) {
 }  
  
 function getComputerChoice() {
-    computerChoice = getRandom(3);
+    computerChoice = getRandomInt(3);
     switch (computerChoice) {
         case 0: return "rock";
         case 1: return "paper";
