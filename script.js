@@ -2,7 +2,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-}  
+}
  
 function getComputerChoice() {
     computerChoice = getRandomInt(3);
@@ -27,27 +27,45 @@ function playRound(humanChoice, computerChoice) {
 let humanScore = 0;
 let computerScore = 0;
 
-const weapons = document.querySelector(".weapons");
+const playGame = document.querySelector("#playGame")
 
-weapons.addEventListener("click", (event) => {
-    let target = event.target;
-    const humanSelection = target.id;
-    const computerSelection = getComputerChoice();
-    outcome = playRound(humanSelection, computerSelection);
+playGame.addEventListener("click", () => {
+    playGame.remove();
 
-    if (outcome == 1) {
-        console.log(`You win! ${humanSelection} beats ${computerSelection}.`)
-        humanScore++;
+    const para = document.createElement("p");
+    para.textContent = "Choose your weapon!";
+
+    const divWeapons = document.createElement("div");
+    divWeapons.setAttribute("class", "weapons");
+    for (item of ["rock", "paper", "scissors"]) {
+        const weaponButton = document.createElement("button");
+        weaponButton.setAttribute("id", item);
+        weaponButton.textContent = item;
+        divWeapons.appendChild(weaponButton);
     }
-    else if (outcome == -1) {
-        console.log(`You lose! ${computerSelection} beats ${humanSelection}.`)
-        computerScore++;
-    }
-    else console.log(`It's a tie!`);
-    console.log(`Your score: ${humanScore}. Computer's score: ${computerScore}.`)
+    const body = document.querySelector("body")
+    body.appendChild(para);
+    body.appendChild(divWeapons);
 
-});
-
+    weapons.addEventListener("click", (event) => {
+        let target = event.target;
+        const humanSelection = target.id;
+        const computerSelection = getComputerChoice();
+        outcome = playRound(humanSelection, computerSelection);
+    
+        if (outcome == 1) {
+            console.log(`You win! ${humanSelection} beats ${computerSelection}.`)
+            humanScore++;
+        }
+        else if (outcome == -1) {
+            console.log(`You lose! ${computerSelection} beats ${humanSelection}.`)
+            computerScore++;
+        }
+        else console.log(`It's a tie!`);
+        console.log(`Your score: ${humanScore}. Computer's score: ${computerScore}.`)
+    
+    });
+})
 /*if (computerScore > humanScore) console.log("You lost!")
 else if (computerScore < humanScore) console.log("You won!")
 else console.log("It's a tie!");*/
