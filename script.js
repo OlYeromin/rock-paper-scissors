@@ -68,20 +68,16 @@ playGame.addEventListener("click", () => {
     
         if (outcome == 1) {
             appendPara(`You win! ${humanSelection} beats ${computerSelection}.`, scoreboard);
-            console.log(`You win! ${humanSelection} beats ${computerSelection}.`);
             humanScore++;
         }
         else if (outcome == -1) {
             appendPara(`You lose! ${computerSelection} beats ${humanSelection}.`, scoreboard);
-            console.log(`You lose! ${computerSelection} beats ${humanSelection}.`);
             computerScore++;
         }
         else {
-            console.log(`It's a tie!`);
             appendPara(`It's a tie!`, scoreboard);
         }
         runningScore.textContent = `Your score: ${humanScore}. Computer's score: ${computerScore}.`;
-        console.log(`Your score: ${humanScore}. Computer's score: ${computerScore}.`)
 
         if ((computerScore === 5) || (humanScore === 5)) {
             divWeapons.remove();
