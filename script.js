@@ -51,11 +51,14 @@ playGame.addEventListener("click", () => {
     appendPara("Chose your weapon!", body);    
     body.appendChild(divWeapons);
 
+    const scoreboard = document.createElement("div");
+    scoreboard.setAttribute("class", "scoreboard");
+    body.appendChild(scoreboard);
+
     divWeapons.addEventListener("click", (event) => {
         let target = event.target;
         const humanSelection = target.id;
         const computerSelection = getComputerChoice();
-        const scoreboard = document.querySelector(".scoreboard");
 
         outcome = playRound(humanSelection, computerSelection);
     
