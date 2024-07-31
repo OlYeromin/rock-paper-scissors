@@ -86,7 +86,7 @@ playGame.addEventListener("click", () => {
         if ((computerScore === 5) || (humanScore === 5)) {
             divWeapons.remove();
             appendPara('Game over!', body);
-            computerScore === 5 ? appendPara("You lose!", body) : "You win!";
+            computerScore === 5 ? appendPara("You lose!", body) : appendPara("You win!", body);
         };
     });
 })
