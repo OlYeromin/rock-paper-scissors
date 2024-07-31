@@ -39,7 +39,6 @@ playGame.addEventListener("click", () => {
     playGame.remove();
     
     const body = document.querySelector("body");
-    
     const divWeapons = document.createElement("div");
     divWeapons.setAttribute("class", "weapons");
     for (item of ["rock", "paper", "scissors"]) {
@@ -52,10 +51,11 @@ playGame.addEventListener("click", () => {
     appendPara("Chose your weapon!", body);    
     body.appendChild(divWeapons);
 
-    weapons.addEventListener("click", (event) => {
+    divWeapons.addEventListener("click", (event) => {
         let target = event.target;
         const humanSelection = target.id;
         const computerSelection = getComputerChoice();
+        
         outcome = playRound(humanSelection, computerSelection);
     
         if (outcome == 1) {
@@ -74,3 +74,4 @@ playGame.addEventListener("click", () => {
 /*if (computerScore > humanScore) console.log("You lost!")
 else if (computerScore < humanScore) console.log("You won!")
 else console.log("It's a tie!");*/
+
