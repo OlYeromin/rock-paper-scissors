@@ -37,10 +37,9 @@ const playGame = document.querySelector("#playGame")
 
 playGame.addEventListener("click", () => {
     playGame.remove();
-
-    const para = document.createElement("p");
-    para.textContent = "Choose your weapon!";
-
+    
+    const body = document.querySelector("body");
+    
     const divWeapons = document.createElement("div");
     divWeapons.setAttribute("class", "weapons");
     for (item of ["rock", "paper", "scissors"]) {
@@ -49,8 +48,8 @@ playGame.addEventListener("click", () => {
         weaponButton.textContent = item;
         divWeapons.appendChild(weaponButton);
     }
-    const body = document.querySelector("body")
-    body.appendChild(para);
+
+    appendPara("Chose your weapon!", body);    
     body.appendChild(divWeapons);
 
     weapons.addEventListener("click", (event) => {
