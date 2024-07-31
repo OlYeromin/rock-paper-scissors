@@ -51,6 +51,10 @@ playGame.addEventListener("click", () => {
     appendPara("Chose your weapon!", body);    
     body.appendChild(divWeapons);
 
+    const runningScore = document.createElement("div");
+    runningScore.textContent = `Your score: ${humanScore}. Computer's score: ${computerScore}.`;
+    body.appendChild(runningScore);
+
     const scoreboard = document.createElement("div");
     scoreboard.setAttribute("class", "scoreboard");
     body.appendChild(scoreboard);
@@ -76,6 +80,7 @@ playGame.addEventListener("click", () => {
             console.log(`It's a tie!`);
             appendPara(`It's a tie!`, scoreboard);
         }
+        runningScore.textContent = `Your score: ${humanScore}. Computer's score: ${computerScore}.`;
         console.log(`Your score: ${humanScore}. Computer's score: ${computerScore}.`)
     });
 })
