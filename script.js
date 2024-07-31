@@ -1,8 +1,14 @@
+function appendPara(text, parent) {
+    const para = document.createElement("p");
+    para.textContent = text;
+    parent.appendChild(para);    
+}
+
 // The function below is taken from here:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-}  
+}
  
 function getComputerChoice() {
     computerChoice = getRandomInt(3);
@@ -11,16 +17,6 @@ function getComputerChoice() {
         case 1: return "paper";
         case 2: return "scissors";
     }
-}
-
-function getHumanChoice() {
-    availableWeapons = ["rock", "paper", "scissors"]
-    let weapon = undefined;
-    while (!availableWeapons.includes(weapon)) { 
-        weapon = prompt("Choose your weapon!");
-        weapon = weapon.toLowerCase().trim();
-    }
-    return weapon;
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -34,28 +30,60 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-function playGame() {
-    let outcome;
-    let humanScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
+let humanScore = 0;
+let computerScore = 0;
+
+const playGame = document.querySelector("#playGame")
+
+playGame.addEventListener("click", () => {
+    playGame.remove();
+    
+    const body = document.querySelector("body");
+    const divWeapons = document.createElement("div");
+    divWeapons.setAttribute("class", "weapons");
+    for (item of ["rock", "paper", "scissors"]) {
+        const weaponButton = document.createElement("button");
+        weaponButton.setAttribute("id", item);
+        weaponButton.textContent = item;
+        divWeapons.appendChild(weaponButton);
+    }
+
+    appendPara("Chose your weapon!", body);    
+    body.appendChild(divWeapons);
+
+    const runningScore = document.createElement("div");
+    runningScore.textContent = `Your score: ${humanScore}. Computer's score: ${computerScore}.`;
+    body.appendChild(runningScore);
+
+    const scoreboard = document.createElement("div");
+    scoreboard.setAttribute("class", "scoreboard");
+    body.appendChild(scoreboard);
+
+    divWeapons.addEventListener("click", (event) => {
+        let target = event.target;
+        const humanSelection = target.id;
         const computerSelection = getComputerChoice();
-        const humanSelection = getHumanChoice();
+
         outcome = playRound(humanSelection, computerSelection);
+    
         if (outcome == 1) {
-            console.log(`You win! ${humanSelection} beats ${computerSelection}.`)
+            appendPara(`You win! ${humanSelection} beats ${computerSelection}.`, scoreboard);
             humanScore++;
         }
         else if (outcome == -1) {
-            console.log(`You lose! ${computerSelection} beats ${humanSelection}.`)
+            appendPara(`You lose! ${computerSelection} beats ${humanSelection}.`, scoreboard);
             computerScore++;
         }
-        else console.log(`It's a tie!`);
-        console.log(`Your score: ${humanScore}. Computer's score: ${computerScore}.`)
-    }
-    if (computerScore > humanScore) console.log("You lost!")
-    else if (computerScore < humanScore) console.log("You won!")
-    else console.log("It's a tie!");
-}
+        else {
+            appendPara(`It's a tie!`, scoreboard);
+        }
+        runningScore.textContent = `Your score: ${humanScore}. Computer's score: ${computerScore}.`;
 
-playGame();
+        if ((computerScore === 5) || (humanScore === 5)) {
+            divWeapons.remove();
+            appendPara('Game over!', body);
+            computerScore === 5 ? appendPara("You lose!", body) : appendPara("You win!", body);
+        };
+    });
+})
+
