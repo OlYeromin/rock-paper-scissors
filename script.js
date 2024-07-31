@@ -82,9 +82,12 @@ playGame.addEventListener("click", () => {
         }
         runningScore.textContent = `Your score: ${humanScore}. Computer's score: ${computerScore}.`;
         console.log(`Your score: ${humanScore}. Computer's score: ${computerScore}.`)
+
+        if ((computerScore === 5) || (humanScore === 5)) {
+            divWeapons.remove();
+            appendPara('Game over!', body);
+            computerScore === 5 ? appendPara("You lose!", body) : "You win!";
+        };
     });
 })
-/*if (computerScore > humanScore) console.log("You lost!")
-else if (computerScore < humanScore) console.log("You won!")
-else console.log("It's a tie!");*/
 
